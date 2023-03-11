@@ -9,7 +9,7 @@ spark = SparkSession.builder.appName('SparkByExamples.com').getOrCreate()
 data=[("James","Bond","100",None),
       ("Ann","Varsa","200",'F'),
       ("Tom Cruise","XXX","400",''),
-      ("Tom Brand",None,"400",'M')] 
+      ("Tom Brand",None,"400",'M')]
 columns=["fname","lname","id","gender"]
 df=spark.createDataFrame(data,columns)
 
@@ -18,7 +18,7 @@ from pyspark.sql.functions import expr
 df.select(df.fname.alias("first_name"), \
           df.lname.alias("last_name"), \
           expr(" fname ||','|| lname").alias("fullName") \
-   ).show()
+   ).show(3)
 
 #asc, desc
 df.sort(df.fname.asc()).show()
@@ -45,7 +45,7 @@ df.filter(df.lname.isNotNull()).show()
 
 #like , rlike
 df.select(df.fname,df.lname,df.id) \
-  .filter(df.fname.like("%om")) 
+  .filter(df.fname.like("%om"))
 
 #over
 
@@ -103,7 +103,7 @@ df.select(df.name.getField("fname")).show()
 #from pyspark.sql.functions import lit
 #df = spark.createDataFrame([Row(a=Row(b=1, c=2))])
 #df.withColumn('a', df['a'].withField('b', lit(3))).select('a.b').show()
-        
+
 #from pyspark.sql import Row
 #from pyspark.sql.functions import col, lit
 #df = spark.createDataFrame([
