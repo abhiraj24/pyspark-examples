@@ -3,13 +3,14 @@
 author SparkByExamples.com
 """
 
-import pandas as pd    
-data = [['Scott', 50], ['Jeff', 45], ['Thomas', 54],['Ann',34]] 
-  
-# Create the pandas DataFrame 
-pandasDF = pd.DataFrame(data, columns = ['Name', 'Age']) 
-  
-# print dataframe. 
+import pandas as pd
+data = [['Scott', 50], ['Jeff', 45], ['Thomas', 54],['Ann',34]]
+print(data)
+
+# Create the pandas DataFrame
+pandasDF = pd.DataFrame(data, columns = ['Name', 'Age'])
+
+# print dataframe.
 print(pandasDF)
 
 from pyspark.sql import SparkSession
@@ -19,11 +20,11 @@ spark = SparkSession.builder \
     .appName("SparkByExamples.com") \
     .getOrCreate()
 
-sparkDF=spark.createDataFrame(pandasDF) 
+sparkDF=spark.createDataFrame(pandasDF)
 sparkDF.printSchema()
 sparkDF.show()
 
-#sparkDF=spark.createDataFrame(pandasDF.astype(str)) 
+#sparkDF=spark.createDataFrame(pandasDF.astype(str))
 from pyspark.sql.types import StructType,StructField, StringType, IntegerType
 mySchema = StructType([ StructField("First Name", StringType(), True)\
                        ,StructField("Age", IntegerType(), True)])
