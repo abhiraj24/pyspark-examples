@@ -18,17 +18,17 @@ data = [
  ("Robert,,Williams",["CSharp","VB"],["Spark","Python"],"UT","NV")
 ]
 
-schema = StructType([ 
-    StructField("name",StringType(),True), 
-    StructField("languagesAtSchool",ArrayType(StringType()),True), 
-    StructField("languagesAtWork",ArrayType(StringType()),True), 
-    StructField("currentState", StringType(), True), 
-    StructField("previousState", StringType(), True) 
+schema = StructType([
+    StructField("name",StringType(),True),
+    StructField("languagesAtSchool",ArrayType(StringType()),True),
+    StructField("languagesAtWork",ArrayType(StringType()),True),
+    StructField("currentState", StringType(), True),
+    StructField("previousState", StringType(), True)
   ])
 
 df = spark.createDataFrame(data=data,schema=schema)
 df.printSchema()
-df.show()
+df.show(10)
 
 from pyspark.sql.functions import explode
 df.select(df.name,explode(df.languagesAtSchool)).show()
